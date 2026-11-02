@@ -1,0 +1,10 @@
+{
+  "name": "super-assist",
+  "displayName": "Super Assist",
+  "description": "Set up Super Assist in a React app and keep its page catalog in sync with the code",
+  "author": { "name": "Super Assist", "url": "https://superassist.app" },
+  "homepage": "https://superassist.app",
+  "repository": "https://github.com/mertdogar/super-assist-templates",
+  "license": "MIT",
+  "privacyPolicyUrl": "https://superassist.app/privacy/"
+}

@@ -1,0 +1,29 @@
+{
+  "description": "Keep the session's first scan of the assisted pages, and ask the agent to sync the Super Assist page catalog once they change",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/skills/super-assist/scripts/super-assist.mjs", "hook"],
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/skills/super-assist/scripts/super-assist.mjs", "hook"],
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

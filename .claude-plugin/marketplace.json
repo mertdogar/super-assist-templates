@@ -1,0 +1,12 @@
+{
+  "name": "super-assist",
+  "description": "Super Assist for coding agents",
+  "owner": { "name": "Super Assist", "url": "https://superassist.app" },
+  "plugins": [
+    {
+      "name": "super-assist",
+      "source": "./plugins/super-assist",
+      "description": "Set up Super Assist in a React app and keep its page catalog in sync with the code"
+    }
+  ]
+}

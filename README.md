@@ -1,12 +1,41 @@
 # Super Assist templates
 
-Ready-made agents and skills for Super Assist, written in Markdown. Installing an agent template
-creates its databases, the agent, and each of its skills the organization doesn't already have by
-name. Each template is one file: YAML frontmatter, then a body that becomes its instructions. The
-file name is the template's `name`, in lowercase letters, numbers and single hyphens.
-
-The templates are mirrored one-way from the Super Assist source repository to
+The Super Assist plugin for coding agents, and ready-made agents and skills for Super Assist, written
+in Markdown. Everything here is mirrored one-way from the Super Assist source repository to
 [mertdogar/super-assist-templates](https://github.com/mertdogar/super-assist-templates).
+
+## The coding-agent plugin
+
+`plugins/super-assist` is a Claude Code plugin: the `super-assist` skill, with commands to set up
+Super Assist in a React app and keep its page catalog in sync with the code, the Super Assist MCP
+server, and hooks that ask Claude to sync once the app's assisted pages change. In Claude Code:
+
+```text
+/plugin marketplace add mertdogar/super-assist-templates
+/plugin install super-assist@super-assist
+```
+
+From Claude Code 2.1.275, `/plugin install super-assist --marketplace mertdogar/super-assist-templates`
+does both. Once it's installed, run `/mcp`, select `plugin:super-assist:api` and sign in. Updates
+from this marketplace are off by default: turn them on under `/plugin` › **Marketplaces** ›
+**Enable auto-update**, or run `/plugin marketplace update super-assist`.
+
+Other agents, such as Codex, Cursor and GitHub Copilot, install the skill alone, then add the MCP
+server at `https://superassist.app/mcp`:
+
+```sh
+npx skills add mertdogar/super-assist-templates
+```
+
+[Connect a coding agent](https://superassist.app/how-to/give-agents-the-docs/) has each client's
+steps and the skill's commands.
+
+## Agent and skill templates
+
+Installing an agent template creates its databases, the agent, and each of its skills the
+organization doesn't already have by name. Each template is one file: YAML frontmatter, then a body
+that becomes its instructions. The file name is the template's `name`, in lowercase letters, numbers
+and single hyphens.
 
 ## Skill templates
 
