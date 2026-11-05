@@ -24,7 +24,7 @@ The variable keeps its name: a `NEXT_PUBLIC_` or `VITE_` prefix would put it in 
 
 ## 3. The token route
 
-Install `jose`, and add a server route beside the app's auth that answers the signed-in user's token, and `401` without a session. The claims are the object the app would pass unsigned as `user`: `id`, and whichever of `name`, `email`, `avatarUrl`, `attributes`, `companies` and `company` the session knows, under the rules in `https://superassist.app/how-to/use-the-hosted-runtime.md`; a field the session lacks is left out, since `null` is refused. Read them from the session on the server, never from the request. In the Next.js app router, `app/api/super-assist/token/route.ts`, where `auth()` stands for the app's own session read:
+Install `jose`, and add a server route beside the app's auth that answers the signed-in user's token, and `401` without a session. The claims are the object the app would pass unsigned as `user`: `id`, and whichever of `name`, `email`, `avatarUrl`, `attributes`, `companies` and `company` the session knows, under the rules in `https://superassist.app/how-to/identify-end-users.md`; a field the session lacks is left out, since `null` is refused. Read them from the session on the server, never from the request. In the Next.js app router, `app/api/super-assist/token/route.ts`, where `auth()` stands for the app's own session read:
 
 ```ts
 import { SignJWT } from "jose";
