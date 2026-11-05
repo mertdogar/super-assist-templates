@@ -11619,7 +11619,7 @@ function scan(root) {
 	const sources = files(root, root);
 	function load(file) {
 		let module = modules.get(file);
-		if (!module) modules.set(file, module = read(file, rel(file)));
+		if (!module) modules.set(file, module = read$1(file, rel(file)));
 		return module;
 	}
 	function resolve(from, source) {
@@ -11959,7 +11959,7 @@ function summary({ routers, body, destinations, dynamic }, app = ".") {
 	lines.push("", "super-assist scan --json prints the pages post body.");
 	return lines.join("\n");
 }
-function read(file, name) {
+function read$1(file, name) {
 	const code = readFileSync(file, "utf8");
 	const plugins = /\.[mc]?ts$/.test(file) ? ["typescript"] : file.endsWith(".tsx") ? ["typescript", "jsx"] : ["jsx"];
 	let program;
@@ -12203,9 +12203,43 @@ else if (command === "hook") try {
 	const output = hook(readFileSync(0, "utf8"));
 	if (output) console.log(output);
 } catch {}
+else if (command === "identity-secret") try {
+	const [project, file = ".env.local"] = args.filter((arg) => !arg.startsWith("--"));
+	if (!project) throw new Error("Name the project: super-assist identity-secret <project id> [env file]");
+	const key = /^SUPER_ASSIST_API_KEY=(.*?)\s*$/m.exec(read(".env.local"))?.[1];
+	if (!key) throw new Error("No SUPER_ASSIST_API_KEY in .env.local: add an organization key there first.");
+	const host = args.find((arg) => arg.startsWith("--host="))?.slice(7);
+	const url = new URL(`/api/v1/projects/${encodeURIComponent(project)}/identity-secret`, host ?? "https://superassist.app");
+	const call = async (method) => {
+		const response = await fetch(url, {
+			method,
+			headers: { authorization: `Bearer ${key}` }
+		});
+		const body = await response.json().catch(() => void 0);
+		if (!response.ok || body?.identitySecret === void 0) throw new Error(`${method} ${url} answered ${response.status}${body?.error ? `: ${body.error.code}, ${body.error.message}` : ""}`);
+		return body.identitySecret;
+	};
+	const kept = await call("GET");
+	const line = `SUPER_ASSIST_IDENTITY_SECRET=${kept ?? await call("POST")}`;
+	const text = read(file);
+	const set = /^SUPER_ASSIST_IDENTITY_SECRET=.*$/m;
+	writeFileSync(file, set.test(text) ? text.replace(set, () => line) : `${text}${text && !text.endsWith("\n") ? "\n" : ""}${line}\n`);
+	console.log(`${kept ? "Wrote the project's identity secret" : "Generated the project's identity secret and wrote it"} to ${file} as SUPER_ASSIST_IDENTITY_SECRET.`);
+} catch (error) {
+	console.error(error instanceof Error ? error.message : error);
+	process.exitCode = 1;
+}
 else {
-	console.log("super-assist scan [dir] [--json]  the pages post body an app's routes and Assisted components describe\nsuper-assist hook                 for the Claude Code plugin's SessionStart and Stop hooks, JSON on stdin");
+	console.log([
+		"super-assist scan [dir] [--json]                      the pages post body an app's routes and Assisted components describe",
+		"super-assist hook                                     for the Claude Code plugin's SessionStart and Stop hooks, JSON on stdin",
+		"super-assist identity-secret <project id> [env file]  writes the project's identity secret to the env file (.env.local) as SUPER_ASSIST_IDENTITY_SECRET,",
+		"  [--host=<origin>]                                   generating it when the project has none, with the organization key in .env.local's SUPER_ASSIST_API_KEY"
+	].join("\n"));
 	process.exitCode = command && command !== "--help" ? 1 : 0;
+}
+function read(file) {
+	return existsSync(file) ? readFileSync(file, "utf8") : "";
 }
 //#endregion
 export {};

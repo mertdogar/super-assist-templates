@@ -1,7 +1,7 @@
 ---
 name: super-assist
-description: Builds with @super-assist/react, the assistant beside every page of a React app, and keeps the app's Super Assist project in step with its code. Use when code imports @super-assist/react; when the user wants an in-app assistant that reads a page, presses its buttons, fills its forms or runs its tools; or to set up Super Assist, sync its page catalog, draft journeys or check an app's setup.
-argument-hint: "[setup | sync [dir] | page [route] | journey [goal] | doctor]"
+description: Builds with @super-assist/react, the assistant beside every page of a React app, and keeps the app's Super Assist project in step with its code. Use when code imports @super-assist/react; when the user wants an in-app assistant that reads a page, presses its buttons, fills its forms or runs its tools; or to set up Super Assist, sync its page catalog, draft journeys, sign its end users' identity or check an app's setup.
+argument-hint: "[setup | sync [dir] | page [route] | journey [goal] | identity | doctor]"
 ---
 
 # super-assist
@@ -22,6 +22,7 @@ Name things in these words. The docs, the props and the model's text use them.
 - **Project**: the app on Super Assist, with its publishable key (`pk_…`), allowed origins and default **agent**, the organization's named assistant.
 - **Page catalog**: the project's record of the app's assisted pages, each with its path, name, instructions and the actions and fields it lends. **Sync** makes it match the code.
 - **Journey**: steps that walk end users through the app toward a goal, each a page by its path and optionally one action or field it lends. Drafted by you, shown to end users once a member publishes it.
+- **End user**: a person using the app, passed as `user`. **Verified** when the app's server signs who they are with the project's **identity secret**, **unverified** when the app passes them as they are, or a **visitor** when it passes no one.
 
 ## Docs
 
@@ -96,13 +97,14 @@ Without `--json` it prints a summary for the user. With no app dir in a reposito
 
 ## Commands
 
-| Command          | What it does                                                                                                  | Reference                                    |
-| ---------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| `setup`          | Adds the panel to the app, reuses or creates its agent and project, writes the key, syncs, proposes journeys  | [reference/setup.md](reference/setup.md)     |
-| `sync [dir]`     | Makes the page catalog match the code, corrects `destinations`, and asks about journeys that name what's gone | [reference/sync.md](reference/sync.md)       |
-| `page [route]`   | Makes a route's page assisted: its name, instructions, content, actions and fields                            | [reference/page.md](reference/page.md)       |
-| `journey [goal]` | Drafts journeys from the page catalog, as `manual` drafts a member publishes                                  | [reference/journey.md](reference/journey.md) |
-| `doctor`         | Checks the library, the key, the connection, the project, catalog drift and journeys naming what's gone       | [reference/doctor.md](reference/doctor.md)   |
+| Command          | What it does                                                                                                   | Reference                                      |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `setup`          | Adds the panel to the app, reuses or creates its agent and project, writes the key, syncs, proposes journeys   | [reference/setup.md](reference/setup.md)       |
+| `sync [dir]`     | Makes the page catalog match the code, corrects `destinations`, and asks about journeys that name what's gone  | [reference/sync.md](reference/sync.md)         |
+| `page [route]`   | Makes a route's page assisted: its name, instructions, content, actions and fields                             | [reference/page.md](reference/page.md)         |
+| `journey [goal]` | Drafts journeys from the page catalog, as `manual` drafts a member publishes                                   | [reference/journey.md](reference/journey.md)   |
+| `identity`       | Signs the signed-in user: the identity secret in the server's env file, a token route, the runtime fetching it | [reference/identity.md](reference/identity.md) |
+| `doctor`         | Checks the library, the key, the connection, the project, catalog drift and journeys naming what's gone        | [reference/doctor.md](reference/doctor.md)     |
 
 Routing:
 
@@ -110,7 +112,7 @@ Routing:
 - **A command named or clearly implied**, as the plugin's Stop hook names `sync`: load its reference and follow it. Ask once if two commands fit.
 - **Otherwise:** the request is building with the library. Follow the guide above, then [Verify](#verify).
 
-`setup`, `sync`, `journey` and `doctor` call Super Assist; each starts from [reference/connect.md](reference/connect.md).
+`setup`, `sync`, `journey`, `identity` and `doctor` call Super Assist; each starts from [reference/connect.md](reference/connect.md).
 
 ## Verify
 

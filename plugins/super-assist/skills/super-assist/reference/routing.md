@@ -8,6 +8,7 @@ For `/super-assist` with no argument: the user is asking what to do next. Lead w
    - not connected → connect first, as [connect.md](connect.md) says, then the command the user is after;
    - `destinations.missing`, `destinations.wrong` or `dynamic` not empty, or code changed since the last sync → `sync`, with the app's dir in a repository of several apps;
    - routes that render no `AssistedPage` → `page <route>`, naming the route;
+   - `useAssistedRuntime` passes an unsigned `user` → `identity`, so Super Assist verifies who is signed in;
    - a key and a connection, with nothing else open → `journey`, or `doctor` for the catalog and journeys on Super Assist.
 3. Show the Commands table from SKILL.md below the recommendations.
 
