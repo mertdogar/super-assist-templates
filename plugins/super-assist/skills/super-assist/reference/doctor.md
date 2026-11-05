@@ -10,7 +10,7 @@ Run them in order; checks 1 to 4 read only the repository and the tool list, 5 t
 2. **The key.** The variable `useAssistedRuntime({ key })` reads holds a `pk_…` value in the app's env files. Missing → `setup`.
 3. **The code.** The scan runs; `destinations.missing`, `destinations.wrong` and `dynamic` are empty, or list what `sync` fills and corrects. A route that renders no `AssistedPage` → `page <route>`.
 4. **The connection.** The MCP server's `search` and `execute` are in the tool list ([connect.md](connect.md)). Missing → connect as it says.
-5. **The project.** `GET /api/v1/projects` has a project with the key as its `publishableKey`. Missing → the reasons in [connect.md](connect.md), or `setup` for a new one.
+5. **The project.** `GET /api/v1/projects` has a project with the key as its `publishableKey`. Missing → the reasons in [connect.md](connect.md), or `setup` for a new one. Its `requireSignedIdentity` on while the code passes an unsigned `user` refuses every signed-in user → `identity`.
 6. **Catalog drift.** `GET /api/v1/projects/{id}/pages` against the scan's `body`: pages the code has and the catalog lacks, pages the catalog has and the code doesn't, and per page the names, instructions and elements that differ. Any → `sync`.
 7. **Journeys naming what's gone.** `GET /api/v1/projects/{id}/journeys`: steps, draft or published, whose `path` the scan's `body` has no page for, or whose `element` that page doesn't lend. Any → `sync`, which asks about each.
 

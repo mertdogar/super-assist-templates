@@ -22,11 +22,11 @@ Name things in these words. The docs, the props and the model's text use them.
 - **Project**: the app on Super Assist, with its publishable key (`pk_…`), allowed origins and default **agent**, the organization's named assistant.
 - **Page catalog**: the project's record of the app's assisted pages, each with its path, name, instructions and the actions and fields it lends. **Sync** makes it match the code.
 - **Journey**: steps that walk end users through the app toward a goal, each a page by its path and optionally one action or field it lends. Drafted by you, shown to end users once a member publishes it.
-- **End user**: a person using the app, passed as `user`. **Verified** when the app's server signs who they are with the project's **identity secret**, **unverified** when the app passes them as they are, or a **visitor** when it passes no one.
+- **End user**: a person using the app, passed as `user` with the `companies` they belong to and the `company` they are in. **Verified** when the app's server signs who they are with the project's **identity secret**, **unverified** when the app passes them as they are, or a **visitor** when it passes no one.
 
 ## Docs
 
-Every docs page is Markdown at its URL with `.md` appended, and https://superassist.app/llms.txt indexes them all. Fetch the page for your branch before writing its code: props, the exact text the model receives, and worked examples live there. Without web access, read the types in `node_modules/@super-assist/react/dist/index.d.mts`.
+Every docs page is Markdown at its URL with `.md` appended, and https://superassist.app/llms.txt indexes them all. Fetch the page for your branch with `curl -s <url>`, which returns it whole, before writing its code: props, the exact text the model receives, and worked examples live there. Without web access, read the types in `node_modules/@super-assist/react/dist/index.d.mts`.
 
 Paths below are under `https://superassist.app/`.
 

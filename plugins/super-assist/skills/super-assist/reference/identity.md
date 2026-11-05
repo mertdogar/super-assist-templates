@@ -58,7 +58,7 @@ const runtime = useAssistedRuntime({
 });
 ```
 
-A token says nothing the hook compares, so the parent renders the component that calls `useAssistedRuntime` with `key={session?.user.id}`: switching straight from one signed-in user to another remounts it. Signing out needs nothing more; the browser goes back to its visitor.
+A token says nothing the hook compares, so the parent renders the component that calls `useAssistedRuntime` with a `key` naming the signed-in user, and their company when the token carries one, such as ``key={`${session.user.id}:${session.company.id}`}``: switching straight to another user or company remounts it. Signing out needs nothing more; the browser goes back to its visitor.
 
 ## Done
 
