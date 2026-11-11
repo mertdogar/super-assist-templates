@@ -1,6 +1,6 @@
 # setup
 
-Takes an app from nothing to a project on Super Assist: the panel in the code, an agent, a project with its key in the env file, a synced page catalog, and journeys drafted.
+Takes an app from nothing to a project on Super Assist: the panel in the code, an agent, a project with its key in the env file, a synced page catalog, and journeys and help center articles drafted.
 
 ## 1. The provider
 
@@ -38,6 +38,10 @@ Run [sync.md](sync.md) for this app.
 
 Run [journey.md](journey.md) without a goal: propose up to three, and create the ones the user picks.
 
+## 7. Articles
+
+Run [article.md](article.md) without a topic: propose up to five, and create the ones the user picks.
+
 ## Done
 
 Done when every call answered 2xx, the key is in the env file, and the page catalog matches the scan. The hand-off lists:
@@ -45,4 +49,5 @@ Done when every call answered 2xx, the key is in the env file, and the page cata
 - the agent and project, reused or created, and the project's page in the dashboard;
 - the placeholders left, for whoever finishes in the dashboard;
 - the journey drafts, whose trigger a member sets and publishes on the project's **Journeys** page;
+- the article drafts, which a member publishes on the project's **Help center** tab, where they also turn the help center on;
 - on the curl path, that the organization key stays in `.env.local` and can be revoked on **API keys**.

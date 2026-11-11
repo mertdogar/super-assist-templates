@@ -7,8 +7,8 @@ in Markdown. Everything here is mirrored one-way from the Super Assist source re
 ## The coding-agent plugin
 
 `plugins/super-assist` is a Claude Code plugin: the `super-assist` skill, with commands to set up
-Super Assist in a React app and keep its page catalog in sync with the code, the Super Assist MCP
-server, and hooks that ask Claude to sync once the app's assisted pages change. In Claude Code:
+Super Assist in a React app, keep its page catalog in sync with the code and draft journeys and help
+center articles, the Super Assist MCP server, and hooks that ask Claude to sync once the app's assisted pages change. In Claude Code:
 
 ```text
 /plugin marketplace add mertdogar/super-assist-templates

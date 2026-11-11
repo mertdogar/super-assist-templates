@@ -1,7 +1,7 @@
 {
   "name": "super-assist",
   "displayName": "Super Assist",
-  "description": "Set up Super Assist in a React app and keep its page catalog in sync with the code",
+  "description": "Set up Super Assist in a React app, keep its page catalog in sync with the code, and draft journeys and help center articles",
   "author": { "name": "Super Assist", "url": "https://superassist.app" },
   "homepage": "https://superassist.app",
   "repository": "https://github.com/mertdogar/super-assist-templates",
