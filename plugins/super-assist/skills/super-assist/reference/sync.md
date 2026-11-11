@@ -1,6 +1,6 @@
 # sync [dir]
 
-Makes the project's page catalog match the app's code: scan, correct `destinations` in the code, fill every gap the scan couldn't read, post the whole catalog with `replace: true`, then ask about the journeys whose steps name what's gone. `dir` is the app's directory, as the Stop hook's nudge passes it in a repository of several apps.
+Makes the project's page catalog match the app's code: scan, correct `destinations` in the code, fill every gap the scan couldn't read, post the whole catalog with `replace: true`, then ask about the journeys whose steps name what's gone and list the help center articles attached to pages it removed. `dir` is the app's directory, as the Stop hook's nudge passes it in a repository of several apps.
 
 ## 1. Connect and find the project
 
@@ -39,7 +39,7 @@ The post takes 1 to 100 pages and at most 2,000 elements. When `body` holds more
 
 In one `execute`:
 
-1. `GET /api/v1/projects/{id}/pages`, the catalog before;
+1. `GET /api/v1/projects/{id}/pages`, the catalog before, each page with the help center `articles` attached to it;
 2. `POST /api/v1/projects/{id}/pages` with `body`, which answers the catalog after;
 3. `GET /api/v1/projects/{id}/journeys`;
 
@@ -56,6 +56,10 @@ Ask about every affected step in one message, the turn's last:
 
 On the answers, `PATCH /api/v1/projects/{id}/journeys/{journeyId}` with the whole changed `steps` of each journey the user said yes for. A journey that has `publishedSteps` shows end users the old ones until it is published again: ask "Publish it now?" and on a yes `POST /api/v1/projects/{id}/journeys/{journeyId}/publish`. On the curl path the publish is refused, so say to publish it on the **Journeys** page.
 
+## 7. Articles attached to removed pages
+
+Sync leaves help center articles alone. For each page of the catalog before that the catalog after has no more, keep its `articles` (`id`, `title`, `publishedAt`) for the hand-off, with the page that took its place when step 6 found one. Change nothing and ask nothing: each article stays attached to the old path, its editor marks that page as no longer in the catalog, and a member attaches it to another page under **Pages in the app**.
+
 ## Done
 
-Done when the post answered 2xx and every affected step is asked about. The hand-off, in the same message as the questions, lists the pages added, changed and removed, the `destinations` edits, the gaps filled, any route left out, and the journeys the questions cover.
+Done when the post answered 2xx and every affected step is asked about. The hand-off, in the same message as the questions, lists the pages added, changed and removed, the `destinations` edits, the gaps filled, any route left out, the journeys the questions cover, and the articles attached to removed pages, each with the page it was on.

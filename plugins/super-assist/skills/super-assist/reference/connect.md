@@ -31,6 +31,6 @@ When the user prefers an organization key over the MCP server, or the client can
 
 1. Run `git check-ignore .env.local`; when it prints nothing, add `.env.local` to `.gitignore`. Ask the user, an owner or admin of the organization, to create a key on the **API keys** page and paste it into `.env.local` as `SUPER_ASSIST_API_KEY`.
 2. The key lives only in `.env.local`. Read it inside each command with `key=$(sed -n 's/^SUPER_ASSIST_API_KEY=//p' .env.local)` and send it only as `Authorization: Bearer $key`, without `-v`. Never print it, and never write it into code.
-3. The routes, bodies and answers are the ones `request()` takes. An organization key can't publish a journey (`403`): a member publishes it on the project's **Journeys** page.
+3. The routes, bodies and answers are the ones `request()` takes. An organization key can't publish a journey or an article (`403`): a member publishes it on the project's **Journeys** or **Help center** page.
 
 The hand-off says the key stays in `.env.local` for later calls and can be revoked on the **API keys** page.
